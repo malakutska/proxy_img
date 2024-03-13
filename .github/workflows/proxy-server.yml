@@ -22,5 +22,6 @@ jobs:
       run: npm install
 
     - name: Run proxy server
-      run: node proxy.js
-
+      run: |
+        nohup node proxy.js > /dev/null 2>&1 &  # Запуск в фоновом режиме
+        sleep 1  # Подождать некоторое время перед завершением задачи
