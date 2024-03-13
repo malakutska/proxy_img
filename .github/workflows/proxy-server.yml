@@ -24,3 +24,17 @@ jobs:
     - name: Build and start server
       run: |
         nohup npm start &
+
+    - name: Wait for server to start
+      run: sleep 5s  # Подождем, чтобы сервер успел стартовать
+
+    - name: Publish to GitHub Pages
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git branch -D gh-pages || true
+        git checkout -b gh-pages
+        cp -r ./* .
+        git add .
+        git commit -m "Publish to GitHub Pages"
+        git push -u origin gh-pages
