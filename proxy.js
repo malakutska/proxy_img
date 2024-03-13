@@ -1,8 +1,8 @@
 import { serve } from 'https://deno.land/std/http/server.ts';
 
-const server = serve({ port: 3000 });
+const server = serve({ port: 8000 });
 
-console.log('\x1b[36m', 'Proxy server is listening on port 3000');
+console.log('\x1b[36m', 'Proxy server is listening on port 8000');
 
 // Используем метод listenAndServe
 for await (const req of server) {
