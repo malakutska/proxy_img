@@ -1,6 +1,10 @@
-import { createServer } from 'https://deno.land/std/http/server.ts';
+import { serve } from 'https://deno.land/std/http/server.ts';
 
-const server = createServer(async (req) => {
+const server = serve({ port: 3004 });
+
+console.log('\x1b[36m', 'Proxy server is listening on port 3004');
+
+for await (const req of server) {
   // Устанавливаем заголовки CORS для разрешения доступа с любого домена
   req.respond({
     status: 200,
@@ -13,7 +17,7 @@ const server = createServer(async (req) => {
 
   if (req.method === 'OPTIONS') {
     // Поддержка предварительных запросов (preflight)
-    return;
+    continue;
   }
 
   const imageUrl = new URL(req.url).pathname;
@@ -44,12 +48,12 @@ const server = createServer(async (req) => {
 
     if (response.status !== 200) {
       console.error('\x1b[31m', `Unsuccessful request: ${imageUrl}, status: ${response.status}`);
-      return;
+      continue;
     }
 
     if (contentType && contentType.startsWith('image/')) {
       const body = new Uint8Array(await response.arrayBuffer());
-      req.respond({
+      await req.respond({
         status: 200,
         headers: new Headers({
           'Content-Type': contentType,
@@ -62,8 +66,4 @@ const server = createServer(async (req) => {
   } catch (err) {
     console.error('\x1b[31m', `Request error: ${err.message}`);
   }
-});
-
-const port = Deno.env.get('PORT') || '3004';
-console.log('\x1b[36m', `Proxy server is listening on port ${port}`);
-await server.listen(`:${port}`);
+}
