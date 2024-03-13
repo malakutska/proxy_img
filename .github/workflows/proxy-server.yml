@@ -26,12 +26,17 @@ jobs:
         nohup npm start &
         sleep 5s  # Подождем, чтобы сервер успел стартовать
 
+    - name: Check if gh-pages branch exists, create if not
+      run: |
+        if ! git show-ref --quiet refs/heads/gh-pages; then
+          git checkout -b gh-pages
+          git push -u origin gh-pages
+        fi
+
     - name: Publish to GitHub Pages
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
-        git branch -D gh-pages || true
-        git checkout -B gh-pages
         cp -r ./* .
         git add .
         git commit -m "Publish to GitHub Pages"
