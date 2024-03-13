@@ -1,0 +1,25 @@
+name: Deno Proxy Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Deno
+      uses: denolib/setup-deno@v2
+      with:
+        deno-version: 1.x
+
+    - name: Install dependencies
+      run: deno cache --unstable --lock=lock.json --lock-write=lock.json proxy.js
+
+    - name: Run Deno proxy server
+      run: deno run --allow-net proxy.js
