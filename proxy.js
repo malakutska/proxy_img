@@ -4,6 +4,7 @@ const server = serve({ port: 3000 });
 
 console.log('\x1b[36m', 'Proxy server is listening on port 3000');
 
+// Используем метод listenAndServe
 for await (const req of server) {
   // Устанавливаем заголовки CORS для разрешения доступа с любого домена
   req.respond({
