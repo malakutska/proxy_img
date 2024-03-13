@@ -1,8 +1,8 @@
 import { serve } from 'https://deno.land/std/http/server.ts';
 
-const server = serve({ port: 3004 });
+const server = serve({ port: 3000 });
 
-console.log('\x1b[36m', 'Proxy server is listening on port 3004');
+console.log('\x1b[36m', 'Proxy server is listening on port 3000');
 
 for await (const req of server) {
   // Устанавливаем заголовки CORS для разрешения доступа с любого домена
