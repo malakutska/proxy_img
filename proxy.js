@@ -52,7 +52,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-const port = 3000;
-server.listen(port, () => {
-  console.log('\x1b[36m', `Proxy server is listening on port ${port}`);
+// Порт указывать не нужно, GitHub Actions предоставит соответствующий порт в переменной среды
+server.listen(() => {
+  console.log('\x1b[36m', `Proxy server is listening on port ${process.env.PORT || 3000}`);
 });
