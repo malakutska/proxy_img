@@ -19,7 +19,7 @@ jobs:
         deno-version: 1.x
 
     - name: Install dependencies
-      run: deno cache --unstable-* proxy.js
+      run: deno cache --unstable proxy.js
 
     - name: Run Deno proxy server
       run: deno run --allow-net --unstable-* ./proxy.js
