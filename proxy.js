@@ -4,8 +4,8 @@ const server = serve({ port: 8000 });
 
 console.log('\x1b[36m', 'Proxy server is listening on port 8000');
 
-// Используем метод listenAndServe
-for await (const req of server) {
+// Функция для обработки запроса
+async function handleRequest(req) {
   // Устанавливаем заголовки CORS для разрешения доступа с любого домена
   await req.respond({
     status: 200,
@@ -18,7 +18,7 @@ for await (const req of server) {
 
   if (req.method === 'OPTIONS') {
     // Поддержка предварительных запросов (preflight)
-    continue;
+    return;
   }
 
   const imageUrl = new URL(req.url).pathname;
@@ -49,7 +49,7 @@ for await (const req of server) {
 
     if (response.status !== 200) {
       console.error('\x1b[31m', `Unsuccessful request: ${imageUrl}, status: ${response.status}`);
-      continue;
+      return;
     }
 
     if (contentType && contentType.startsWith('image/')) {
@@ -67,4 +67,13 @@ for await (const req of server) {
   } catch (err) {
     console.error('\x1b[31m', `Request error: ${err.message}`);
   }
+}
+
+// Обработка запросов
+while (true) {
+  const nextRequest = await server.nextRequest();
+  if (nextRequest.done) {
+    break;
+  }
+  handleRequest(nextRequest.value);
 }
