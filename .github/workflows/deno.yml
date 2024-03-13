@@ -22,5 +22,5 @@ jobs:
       run: deno cache proxy.js
 
     - name: Run Deno proxy server
-      run: deno run --allow-net --unstable-* ./proxy.js
+      run: deno run --allow-net --unstable ./proxy.js
 
