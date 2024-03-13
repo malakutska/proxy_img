@@ -9,7 +9,7 @@ for await (const req of server) {
   // Обработка запросов в асинхронном режиме
   (async () => {
     // Устанавливаем заголовки CORS для разрешения доступа с любого домена
-    await req.respondWith({
+    await req.respond({
       status: 200,
       headers: new Headers({
         'Access-Control-Allow-Origin': '*',
@@ -56,7 +56,7 @@ for await (const req of server) {
 
       if (contentType && contentType.startsWith('image/')) {
         const body = new Uint8Array(await response.arrayBuffer());
-        await req.respondWith({
+        await req.respond({
           status: 200,
           headers: new Headers({
             'Content-Type': contentType,
