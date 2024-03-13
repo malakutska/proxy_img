@@ -1,5 +1,5 @@
 {
-  "name": "TMDB Image proxy",
+  "name": "tmdb-image-proxy",
   "version": "1.0.0",
   "description": "Proxy server for handling image requests",
   "main": "proxy.js",
