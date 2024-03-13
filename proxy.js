@@ -26,7 +26,8 @@ async function handleRequest(req) {
   // Проверяем, содержит ли URL "https://api.lampishe.cc/"
   if (imageUrl.includes('https://api.lampishe.cc/')) {
     // Обрезаем URL, оставляя только путь к изображению
-    imageUrl.replace('https://api.lampishe.cc/', '/');
+    imageUrl = imageUrl.replace('https://api.lampishe.cc/', '/');
+
   }
 
   // Проксирование запросов к изображениям
