@@ -3,7 +3,7 @@ name: Proxy Server
 on:
   push:
     branches:
-      - main  # Используйте вашу основную ветку
+      - main
 
 jobs:
   build:
@@ -16,12 +16,11 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '14'  # Используйте версию Node.js, которую вам нужно
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run proxy server
+    - name: Build and start server
       run: |
-        nohup node proxy.js > /dev/null 2>&1 &  # Запуск в фоновом режиме
-        sleep 1  # Подождать некоторое время перед завершением задачи
+        npm start
