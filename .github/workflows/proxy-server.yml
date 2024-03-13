@@ -1,0 +1,25 @@
+name: Proxy Server
+
+on:
+  push:
+    branches:
+      - main  # Используйте вашу основную ветку
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # Используйте версию Node.js, которую вам нужно
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run proxy server
+      run: node ваш_файл_с_кодом.js
