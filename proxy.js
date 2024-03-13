@@ -26,8 +26,7 @@ async function handleRequest(req) {
   // Проверяем, содержит ли URL "https://api.lampishe.cc/"
   if (imageUrl.includes('https://api.lampishe.cc/')) {
     // Обрезаем URL, оставляя только путь к изображению
-    imageUrl = imageUrl.replace('https://api.lampishe.cc/', '/');
-
+    imageUrl.replace('https://api.lampishe.cc/', '/');
   }
 
   // Проксирование запросов к изображениям
@@ -71,10 +70,6 @@ async function handleRequest(req) {
 }
 
 // Обработка запросов
-while (true) {
-  const nextRequest = await server.nextRequest();
-  if (nextRequest.done) {
-    break;
-  }
-  handleRequest(nextRequest.value);
+for await (const req of server) {
+  handleRequest(req);
 }
