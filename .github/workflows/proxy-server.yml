@@ -22,4 +22,5 @@ jobs:
       run: npm install
 
     - name: Run proxy server
-      run: node ваш_файл_с_кодом.js
+      run: node node proxy.js
+
