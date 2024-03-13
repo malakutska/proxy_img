@@ -1,0 +1,14 @@
+{
+  "name": "TMDB Image proxy",
+  "version": "1.0.0",
+  "description": "Proxy server for handling image requests",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "url": "^0.11.0"
+  }
+}
